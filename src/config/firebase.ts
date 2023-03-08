@@ -1,0 +1,19 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD6i5HQm3l2DGatCWk00yH9Bhpo001eZTs",
+  authDomain: "e-gs-encibra.firebaseapp.com",
+  projectId: "e-gs-encibra",
+  storageBucket: "e-gs-encibra.appspot.com",
+  messagingSenderId: "906021664063",
+  appId: "1:906021664063:web:32be7bf7ecfe2dfc72cf8a",
+  measurementId: "G-MLYD89FP7K",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+export { db };

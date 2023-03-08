@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "contract_value": 113205516.78,
+    "payment": 80291166.879999995,
+    "contract_object": "Revitalização e mordenização do sistema produtor bolonha",
+    "additive_value": 17833743.059999999,
+    "contract_id": "41-2017",
+    "readjustment": 11350967.73,
+    "rebalancing": 0,
+    "project_value": 0
+  },
+  {
+    "id": 2,
+    "contract_value": 68645276.469999999,
+    "payment": 86654151.540000007,
+    "contract_object": "fornecimento de materiais, na Ampliação e melhoria do Sistema de Abastecimento de Água da cidade de CASTANHAL",
+    "additive_value": 18710672.329999998,
+    "contract_id": "42-2017",
+    "readjustment": 15831943.98,
+    "rebalancing": 5054520.5300000003,
+    "project_value": 0
+  },
+  {
+    "id": 3,
+    "contract_value": 9939851.6300000008,
+    "payment": 6807515.1100000003,
+    "contract_object": "Ampliação do Sistema de Abastecimento de Água no Bairro de Águas Lindas",
+    "additive_value": 645948.80000000005,
+    "contract_id": "11-2018",
+    "readjustment": 1337697.3200000001,
+    "rebalancing": 1268444.4199999999,
+    "project_value": 0
+  },
+  {
+    "id": 4,
+    "contract_value": 11110917.23,
+    "payment": 7930435.6200000001,
+    "contract_object": "Ampliação do sistema de abastecimento de água do município de Santarém",
+    "additive_value": 1408174.8400000001,
+    "contract_id": "29-2018",
+    "readjustment": 1059323.5800000001,
+    "rebalancing": 376284.92999999999,
+    "project_value": 0
+  },
+  {
+    "id": 5,
+    "contract_value": 82767455.109999999,
+    "payment": 33509011.199999999,
+    "contract_object": "Ampliação do sistema de abastecimento de água do município de Santarém",
+    "additive_value": 23783650.049999997,
+    "contract_id": "97-2018",
+    "readjustment": 4233376.1600000001,
+    "rebalancing": 4610209.1500000004,
+    "project_value": 0
+  },
+  {
+    "id": 6,
+    "contract_value": 52838631.170000002,
+    "payment": 62941823.539999999,
+    "contract_object": "elevação e destino final do esgoto do una localizado na rodovia Arthur Bernardes",
+    "additive_value": 13284991.640000001,
+    "contract_id": "70-2019",
+    "readjustment": 7662731.5700000003,
+    "rebalancing": 0,
+    "project_value": 0
+  },
+  {
+    "id": 7,
+    "contract_value": 5177912.25,
+    "payment": 1246351.1699999999,
+    "contract_object": "recuperação estrutural dos reservatórios apoiados (Conquista e Irurá)",
+    "additive_value": 103186.06,
+    "contract_id": "09-2022",
+    "readjustment": 0,
+    "rebalancing": 0,
+    "project_value": 0
+  },
+  {
+    "id": 8,
+    "contract_value": 54915077.5,
+    "payment": 10253855.609999999,
+    "contract_object": "Ampliação do sistema de abastecimento de água, na sede do Município de Alenquer",
+    "additive_value": 0,
+    "contract_id": "16-2022",
+    "readjustment": 0,
+    "rebalancing": 0,
+    "project_value": 0
+  },
+  {
+    "id": 9,
+    "contract_value": 24606276.239999998,
+    "payment": 1609168.45,
+    "contract_object": "Sistema de Abastecimento de Água do 10o (décimo) setor, no município de Belém",
+    "additive_value": 19368.860000000001,
+    "contract_id": "18-2022",
+    "readjustment": 0,
+    "rebalancing": 0,
+    "project_value": 0
+  },
+  {
+    "id": 10,
+    "contract_value": 25915467.120000001,
+    "payment": 1815456.99,
+    "contract_object": " Sistema de Abastecimento de Água do 3o (terceiro) setor, no município de Belém",
+    "additive_value": -127132.87,
+    "contract_id": "19-2022",
+    "readjustment": 0,
+    "rebalancing": 0,
+    "project_value": 0
+  },
+  {
+    "id": 11,
+    "contract_value": 48343941.369999997,
+    "payment": 670960.26000000001,
+    "contract_object": "conclusão das obras e serviços e ampliação do sistema de abastecimento de água na Sede do Município de Oriximina",
+    "additive_value": -1020109.47,
+    "contract_id": "24-2022",
+    "readjustment": 0,
+    "rebalancing": 0,
+    "project_value": 0
+  },
+  {
+    "id": 12,
+    "contract_value": 79895232.739999995,
+    "payment": 403188.38,
+    "contract_object": "Execução da implentação do sitema de esgotamento sanitário em Alter do Chão.",
+    "additive_value": 0,
+    "contract_id": "26-2022",
+    "readjustment": 0,
+    "rebalancing": 0,
+    "project_value": 0
+  }
+]
