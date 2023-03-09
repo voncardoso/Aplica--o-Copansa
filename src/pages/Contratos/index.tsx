@@ -1,5 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useNavigate, useNavigation } from "react-router-dom";
 import { db } from "../../config/firebase";
 import {
   ContarctContainer,
@@ -13,6 +14,7 @@ import {
 
 export function Contratos() {
   const [contracts, setContracts] = useState<any>([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function getContracts() {
@@ -23,7 +25,11 @@ export function Contratos() {
     getContracts();
   },[]);
 
+  function navigateContractItms(id: string){
+    navigate(`/contratos/${id}`)
+  }
 
+console.log(contracts)
   return (
     <ContarctContainer>
       <ContarctHeader>
@@ -46,26 +52,28 @@ export function Contratos() {
             {contracts.map((contract: any) =>{
                 if(contract.contractor.cnpj === "04945341000190"){
                   return(
-                    <tr className="dados">
-                  <td>
+                    <tr className="dados" onClick={() =>{
+                      navigateContractItms(contract.contract.id)
+                    }}>
+                      <td>
                     <p>{contract.contract.id}</p>
                     <div>
                       <p>{contract.company.name}</p>
                     </div>
-                  </td>
-                  <td>
+                      </td>
+                      <td>
                     <p>{contract.contract.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
-                  </td>
-                  <td>
+                      </td>
+                      <td>
                     <p>{contract.dates.contract.start}</p>
-                  </td>
-                  <td>
+                      </td>
+                      <td>
                     <p>{contract.dates.contract.end}</p>
-                  </td>
-                  <Status variant={contract.status}>
-                    <p>{contract.status.charAt(0).toUpperCase() + contract.status.slice(1)}</p>
-                  </Status >
-                </tr>
+                      </td>
+                      <Status variant={contract.status}>
+                        <p>{contract.status.charAt(0).toUpperCase() + contract.status.slice(1)}</p>
+                      </Status >
+                    </tr>
                   )
                 }
             })}
@@ -87,10 +95,11 @@ export function Contratos() {
           </ContarctTableThead>
           <ContarctTableTbody>
             {contracts.map((contract: any) =>{
-              console.log(contract.contractor.cnpj)
               if(contract.contractor.cnpj === "05054937000163"){
                 return(
-                  <tr className="dados">
+                  <tr className="dados" onClick={() =>{
+                    navigateContractItms(contract.contract.id)
+                  }}>
                 <td>
                   <p>{contract.contract.id}</p>
                   <div>

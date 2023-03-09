@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components"
 import { Router } from "./Router"
 import { GlobalStyle } from "./style/style"
 import { defaultTheme } from "./style/theme/default"
-
+import "./config/firebase"
 
 function App() {
   return (
