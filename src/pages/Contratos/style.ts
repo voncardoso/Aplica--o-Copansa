@@ -61,6 +61,7 @@ export const ContarctTableTbody = styled.tbody`
       font-size: 14px;
     }
   }
+
   .dados {
     background: ${(props) => props.theme["whithe"]};
     border-bottom: 6px solid ${(props) => props.theme["background"]};
@@ -76,7 +77,7 @@ export const ContarctTableTbody = styled.tbody`
 
         > p {
           padding: 5px;
-          background: ${(props) => props.theme["green-200"]};
+          background: #D8D090;
           border-radius: 10px;
         }
 
@@ -89,6 +90,17 @@ export const ContarctTableTbody = styled.tbody`
       }
     }
   }
+`;
+
+interface StatusProps {
+  variant: 'ativo' | 'finalizado' | 'cancelado'
+}
+
+
+export const Status= styled.td<StatusProps>`
+    padding: 10px;
+    font-size: 14px;
+    color: ${(props) => props.variant === 'ativo' ? props.theme["green-200"] : "" || props.variant === 'finalizado' ? props.theme["red"]  : "" ||  props.variant === 'cancelado' ? props.theme["yellow"] : ""};
 `;
 
 export const ContarctTableTheadTotal = styled.thead`

@@ -1,5 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../../config/firebase";
 import {
   ContarctContainer,
@@ -8,20 +8,21 @@ import {
   ContarctTableSection,
   ContarctTableTbody,
   ContarctTableThead,
+  Status,
 } from "./style";
 
 export function Contratos() {
-  useEffect(() => {}, []);
+  const [contracts, setContracts] = useState<any>([])
 
   useEffect(() => {
     async function getContracts() {
-      const querySnapshot = await getDocs(collection(db, "users"));
-      querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`);
-      });
+      const collectionRef = collection(db, "contracts")
+      const querySnapshot = await getDocs(collectionRef);
+      setContracts(querySnapshot.docs.map((doc: any) => ({ ...doc.data(), id: doc.id})))
     }
     getContracts();
-  });
+  },[]);
+
 
   return (
     <ContarctContainer>
@@ -33,8 +34,7 @@ export function Contratos() {
         <ContarctTableSection>
           <ContarctTableThead>
             <tr>
-              <th>EMPRESA</th>
-              <th>DATA</th>
+              <th>Contrato</th>
               <th>VALOR</th>
               <th>ÍNICIO</th>
               <th>FIM</th>
@@ -42,77 +42,30 @@ export function Contratos() {
             </tr>
           </ContarctTableThead>
           <ContarctTableTbody>
-            <tr className="dados">
+            {contracts.map((contract: any) =>{
+              return(
+                <tr className="dados">
               <td>
-                <p>156.320,48</p>
+                <p>{contract.contract.id}</p>
                 <div>
-                  <p>CONSORCIO ANANINDEU 31/01/2018 31/01/2024</p>
+                  <p>{contract.company.name}</p>
                 </div>
               </td>
               <td>
-                <span>0.000%</span>
+                <p>{contract.contract.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
               </td>
               <td>
-                <p>R$0,00</p>
+                <p>{contract.dates.contract.start}</p>
               </td>
               <td>
-                <p>R$0,00</p>
+                <p>{contract.dates.contract.end}</p>
               </td>
-              <td>
-                <p>R$0,00</p>
-              </td>
-              <td>
-                <p>R$0,00</p>
-              </td>
+              <Status variant={contract.status}>
+                <p>{contract.status.charAt(0).toUpperCase() + contract.status.slice(1)}</p>
+              </Status >
             </tr>
-
-            <tr className="dados">
-              <td>
-                <p>156.320,48</p>
-                <div>
-                  <p>CONSORCIO ANANINDEU 31/01/2018 31/01/2024</p>
-                </div>
-              </td>
-              <td>
-                <span>0.000%</span>
-              </td>
-              <td>
-                <p>R$0,00</p>
-              </td>
-              <td>
-                <p>R$0,00</p>
-              </td>
-              <td>
-                <p>R$0,00</p>
-              </td>
-              <td>
-                <p>R$0,00</p>
-              </td>
-            </tr>
-
-            <tr className="dados">
-              <td>
-                <p>156.320,48</p>
-                <div>
-                  <p>CONSORCIO ANANINDEU 31/01/2018 31/01/2024</p>
-                </div>
-              </td>
-              <td>
-                <span>0.000%</span>
-              </td>
-              <td>
-                <p>R$0,00</p>
-              </td>
-              <td>
-                <p>R$0,00</p>
-              </td>
-              <td>
-                <p>R$0,00</p>
-              </td>
-              <td>
-                <p>R$0,00</p>
-              </td>
-            </tr>
+              )
+            })}
           </ContarctTableTbody>
         </ContarctTableSection>
       </ContarctSection>

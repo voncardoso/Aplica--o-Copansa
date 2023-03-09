@@ -55,7 +55,7 @@ export const FormLogin = styled.form`
 
     &:focus {
       outline: transparent;
-      box-shadow: 0 0 0 2px #e2942f;
+      box-shadow: 0 0 0 2px ${(props) => props.theme["green"]};;
     }
   }
 
@@ -66,14 +66,14 @@ export const FormLogin = styled.form`
     padding: 10px;
     border-radius: 10px;
     border: none;
-    background: #e2942f;
+    background: ${(props) => props.theme["green"]};
     font-weight: 500;
     color: white;
     transition: 0.2s;
     cursor: pointer;
 
     &:hover {
-      background: #f6b766;
+      background: ${(props) => props.theme["green-houver"]};
     }
   }
 `;
