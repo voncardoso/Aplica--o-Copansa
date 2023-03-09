@@ -19,6 +19,9 @@ export const ContarctSection = styled.section`
   padding: 10px 20px;
   background: ${(props) => props.theme["whithe"]};
   border-radius: 10px;
+  h1{
+    margin-bottom: 10px;
+  }
 `;
 
 export const ContarctTableSection = styled.table`
@@ -27,6 +30,7 @@ export const ContarctTableSection = styled.table`
   text-align: left;
   border-collapse: collapse;
   background: ${(props) => props.theme["background"]};
+
 `;
 
 export const ContarctTableThead = styled.thead`
@@ -100,7 +104,9 @@ interface StatusProps {
 export const Status= styled.td<StatusProps>`
     padding: 10px;
     font-size: 14px;
-    color: ${(props) => props.variant === 'ativo' ? props.theme["green-200"] : "" || props.variant === 'finalizado' ? props.theme["red"]  : "" ||  props.variant === 'cancelado' ? props.theme["yellow"] : ""};
+    color: ${(props) => props.variant === 'ativo' ? props.theme["green-200"] : "" 
+    || props.variant === 'finalizado' ? props.theme["red"]  : "" 
+    ||  props.variant === 'cancelado' ? props.theme["yellow"] : ""};
 `;
 
 export const ContarctTableTheadTotal = styled.thead`

@@ -31,6 +31,7 @@ export function Contratos() {
       </ContarctHeader>
 
       <ContarctSection>
+        <h1>Cosanpa</h1>
         <ContarctTableSection>
           <ContarctTableThead>
             <tr>
@@ -43,32 +44,80 @@ export function Contratos() {
           </ContarctTableThead>
           <ContarctTableTbody>
             {contracts.map((contract: any) =>{
-              return(
-                <tr className="dados">
-              <td>
-                <p>{contract.contract.id}</p>
-                <div>
-                  <p>{contract.company.name}</p>
-                </div>
-              </td>
-              <td>
-                <p>{contract.contract.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
-              </td>
-              <td>
-                <p>{contract.dates.contract.start}</p>
-              </td>
-              <td>
-                <p>{contract.dates.contract.end}</p>
-              </td>
-              <Status variant={contract.status}>
-                <p>{contract.status.charAt(0).toUpperCase() + contract.status.slice(1)}</p>
-              </Status >
-            </tr>
-              )
+                if(contract.contractor.cnpj === "04945341000190"){
+                  return(
+                    <tr className="dados">
+                  <td>
+                    <p>{contract.contract.id}</p>
+                    <div>
+                      <p>{contract.company.name}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <p>{contract.contract.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
+                  </td>
+                  <td>
+                    <p>{contract.dates.contract.start}</p>
+                  </td>
+                  <td>
+                    <p>{contract.dates.contract.end}</p>
+                  </td>
+                  <Status variant={contract.status}>
+                    <p>{contract.status.charAt(0).toUpperCase() + contract.status.slice(1)}</p>
+                  </Status >
+                </tr>
+                  )
+                }
             })}
           </ContarctTableTbody>
         </ContarctTableSection>
       </ContarctSection>
+
+      <ContarctSection>
+        <h1>Seduc</h1>
+        <ContarctTableSection>
+          <ContarctTableThead>
+            <tr>
+              <th>Contrato</th>
+              <th>VALOR</th>
+              <th>ÍNICIO</th>
+              <th>FIM</th>
+              <th>STATUS</th>
+            </tr>
+          </ContarctTableThead>
+          <ContarctTableTbody>
+            {contracts.map((contract: any) =>{
+              console.log(contract.contractor.cnpj)
+              if(contract.contractor.cnpj === "05054937000163"){
+                return(
+                  <tr className="dados">
+                <td>
+                  <p>{contract.contract.id}</p>
+                  <div>
+                    <p>{contract.company.name}</p>
+                  </div>
+                </td>
+                <td>
+                  <p>{contract.contract.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
+                </td>
+                <td>
+                  <p>{contract.dates.contract.start}</p>
+                </td>
+                <td>
+                  <p>{contract.dates.contract.end}</p>
+                </td>
+                <Status variant={contract.status}>
+                  <p>{contract.status.charAt(0).toUpperCase() + contract.status.slice(1)}</p>
+                </Status >
+              </tr>
+                )
+              }
+            })}
+          </ContarctTableTbody>
+        </ContarctTableSection>
+      </ContarctSection>
+
+
     </ContarctContainer>
   );
 }
