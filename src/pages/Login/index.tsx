@@ -1,6 +1,6 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import logo from "../../assets/Logo.svg";
 import { BackgroundImg, FormLogin, InfoLogin, LoginContainer } from "./style";
 

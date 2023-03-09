@@ -1,19 +1,24 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { db } from "../../config/firebase";
 import { 
-            HomeContainer, 
-            HomeHeader, 
-            HomeHeaderSection, 
-            HomeSection, 
-            HomeTableSection, 
-            HomeTableTbody, 
-            HomeTableThead, 
-            HomeTableTheadTotal, 
+        HomeContainer, 
+        HomeHeader, 
+        HomeHeaderSection, 
+        HomeSection, 
+        HomeTableSection, 
+        HomeTableTbody, 
+        HomeTableThead, 
+        HomeTableTheadTotal, 
     } from "./style";
 
 export function ContractItems(){
     const [contracItems, setContractsItems] = useState<any>([])
+    const params = useParams()
+
+    console.log(params.id)
+    
     useEffect(() => {
         async function getContracts() {
             const collectionRef = collection(db, "budgets")
@@ -23,7 +28,20 @@ export function ContractItems(){
         getContracts();
       }, []);
 
-      console.log(contracItems)
+      const existeContract = contracItems.filter((contract: any) =>{
+        return contract.contract.id === params.id
+      })
+
+
+
+     {/** const soma = existeContract?.reducer((acc: any, valor:any) => { 
+        acc.totalValor += valor.contract.value
+        return acc
+      },{
+        totalValor: 0,
+      }) */}
+
+      console.log(existeContract)
     return(
         <HomeContainer>
         <HomeHeader>
@@ -37,172 +55,40 @@ export function ContractItems(){
             <HomeTableSection>
                 <HomeTableThead>
                     <tr>
-                        <th>FONTE/CONTRATOS DE REPASSE</th>
-                        <th>FINACIAMNETO</th>
-                        <th>ADITIVOS</th>
-                        <th>VALOR ATUAL</th>
+                        <th>CONTRATO / VALOR</th>
+                        <th>VALOR</th>
+                        <th>FONTE</th>
+                        <th>FINACIAMENTO</th>
                         <th>MEDIDO</th>
-                        <th>SALDO</th>
+                        <th></th>
                     </tr>
                 </HomeTableThead>
                 <HomeTableTbody>
-                    <tr>
-                        <td colSpan={6} align="justify">
-                            <strong>ANANINDEU</strong>
-                        </td>
-                    </tr>
-                    <tr className="dados">
-                        <td >
-                            <p>156.320,48</p>
-                            <div>
-                                <p>CONSORCIO ANANINDEU 31/01/2018 31/01/2024</p>
-                            </div>  
-                        </td>
-                        <td>
-                            <span>0.000%</span>    
-                        </td>
-                        <td>
-                            <p>R$0,00</p>  
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                    </tr>
-                    <tr className="dados">
-                        <td >
-                            <div>
-                                <p>Nome da obra</p>
-                                <span>PAC II - CONTROLE DE REPASSE</span> 
-                            </div>  
-                        </td>
-                        <td>
-                            <span>0.000%</span>    
-                        </td>
-                        <td>
-                            <p>R$0,00</p>  
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colSpan={6} align="justify">
-                            <strong>ANANINDEU</strong>
-                        </td>
-                    </tr>
-                    <tr className="dados">
-                        <td >
-                            <p>156.320,48</p>
-                            <div>
-                                <p>CONSORCIO ANANINDEU 31/01/2018 31/01/2024</p>
-                            </div>  
-                        </td>
-                        <td>
-                            <span>0.000%</span>    
-                        </td>
-                        <td>
-                            <p>R$0,00</p>  
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                    </tr>
-                    <tr className="dados">
-                        <td >
-                            <div>
-                                <p>Nome da obra</p>
-                                <span>PAC II - CONTROLE DE REPASSE</span> 
-                            </div>  
-                        </td>
-                        <td>
-                            <span>0.000%</span>    
-                        </td>
-                        <td>
-                            <p>R$0,00</p>  
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                    </tr>
-
-
-                    <tr>
-                        <td colSpan={6} align="justify">
-                            <strong>ANANINDEU</strong>
-                        </td>
-                    </tr>
-                    <tr className="dados">
-                        <td >
-                            <p>156.320,48</p>
-                            <div>
-                                <p>CONSORCIO ANANINDEU 31/01/2018 31/01/2024</p>
-                            </div>  
-                        </td>
-                        <td>
-                            <span>0.000%</span>    
-                        </td>
-                        <td>
-                            <p>R$0,00</p>  
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                    </tr>
-                    <tr className="dados">
-                        <td >
-                            <div>
-                                <p>Nome da obra</p>
-                                <span>PAC II - CONTROLE DE REPASSE</span> 
-                            </div>  
-                        </td>
-                        <td>
-                            <span>0.000%</span>    
-                        </td>
-                        <td>
-                            <p>R$0,00</p>  
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                        <td>
-                            <p>R$0,00</p>   
-                        </td>
-                    </tr>
-
+                    {existeContract.map((item: any) =>{
+                        return(
+                            <tr className="dados">
+                            <td >
+                                <p>{item.contract.id}</p>
+                                <div>
+                                    <p>{`${item.financing.sigla} / ${item.contract.service}`}</p>
+                                </div>  
+                            </td>
+                            <td>
+                                <span>{item.contract.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</span>    
+                            </td>
+                            <td>
+                                <p>{item.financing.fonte}</p>   
+                            </td>
+                            <td>
+                                <p>{item.financing.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>  
+                            </td>
+                            <td>
+                                <p>{item.financing.contract}</p>   
+                            </td>
+                            <td></td>
+                        </tr>
+                        )
+                    })}
                  
                 </HomeTableTbody >
                 <HomeTableTheadTotal>
@@ -212,7 +98,7 @@ export function ContractItems(){
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th>0.00</th>
+                        <th></th>
                     </tr>
                 </HomeTableTheadTotal>
             </HomeTableSection>
