@@ -94,6 +94,11 @@ export const ContarctTableTbody = styled.tbody`
       }
     }
   }
+
+  .summary{
+    background:${(props) => props.theme["whithe"]};
+    border-bottom: 1px solid ${(props) => props.theme["background"]};
+  }
 `;
 
 interface StatusProps {

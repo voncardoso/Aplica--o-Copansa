@@ -52,28 +52,33 @@ console.log(contracts)
             {contracts.map((contract: any) =>{
                 if(contract.contractor.cnpj === "04945341000190"){
                   return(
-                    <tr className="dados" onClick={() =>{
-                      navigateContractItms(contract.contract.id)
-                    }}>
+                   <>
+                      <tr className="summary">
+                        <td colSpan={5}>{contract.contract.summary}</td>
+                      </tr>
+                     <tr className="dados" onClick={() =>{
+                        navigateContractItms(contract.contract.id)
+                      }}>
                       <td>
-                    <p>{contract.contract.id}</p>
-                    <div>
-                      <p>{contract.company.name}</p>
-                    </div>
+                        <p>{contract.contract.id}</p>
+                      <div>
+                        <p>{contract.company.name}</p>
+                      </div>
                       </td>
                       <td>
-                    <p>{contract.contract.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
+                        <p>{contract.contract.value.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
                       </td>
                       <td>
-                    <p>{contract.dates.contract.start}</p>
+                        <p>{contract.dates.contract.start}</p>
                       </td>
                       <td>
-                    <p>{contract.dates.contract.end}</p>
+                        <p>{contract.dates.contract.end}</p>
                       </td>
                       <Status variant={contract.status}>
                         <p>{contract.status.charAt(0).toUpperCase() + contract.status.slice(1)}</p>
                       </Status >
                     </tr>
+                   </>
                   )
                 }
             })}

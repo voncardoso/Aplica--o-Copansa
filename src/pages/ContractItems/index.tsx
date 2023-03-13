@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../config/firebase";
 import {
   HomeContainer,
@@ -16,7 +16,7 @@ import {
 export function ContractItems() {
   const [contracItems, setContractsItems] = useState<any>([]);
   const params = useParams();
-
+  const navigate = useNavigate()
   console.log(params.id);
 
   useEffect(() => {
@@ -34,7 +34,6 @@ export function ContractItems() {
     return contract.contract.id === params.id;
   });
 
-  console.log("teste", existeContract);
 
   const soma = existeContract.reduce(
     (acc: any, value: any) => {
@@ -47,10 +46,16 @@ export function ContractItems() {
       totalFinanciamento: 0,
     }
   );
+
+
+  function handlecontructionItem(id: string){
+    navigate(`/obras/${id}`)
+  }
+  
   return (
     <HomeContainer>
       <HomeHeader>
-        <h4>Contratos</h4>
+        <h4></h4>
       </HomeHeader>
 
       <HomeSection>
@@ -71,7 +76,9 @@ export function ContractItems() {
           <HomeTableTbody>
             {existeContract.map((item: any) => {
               return (
-                <tr className="dados">
+                <tr className="dados" onClick={() =>{
+                  handlecontructionItem(item.id)
+                }}>
                   <td>
                     <p>{item.contract.id}</p>
                     <div>
