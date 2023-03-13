@@ -80,7 +80,9 @@ export const ButtonModal = styled.button`
   padding: 5px 10px;
   border-radius: 5px;
   border: none;
-  color: ${(props) => props.theme["whithe"]};;
+  color: ${(props) => props.theme["whithe"]};
+  cursor: pointer;
+  
   &:focus{
       outline: 0;
       box-shadow: 0 0 0 2px ${(props) => props.theme["green"]};
