@@ -68,6 +68,8 @@ export const HomeTableTbody = styled.tbody`
   tr {
     background: ${(props) => props.theme["background"]};
     border-bottom: 1px solid ${(props) => props.theme["background"]};
+    cursor: pointer;
+    
     td {
       padding: 10px;
       font-size: 14px;
