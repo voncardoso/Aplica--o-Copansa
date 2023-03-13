@@ -3,7 +3,7 @@ import { Contratos } from "./pages/Contratos";
 import "./config/firebase";
 import { Login } from "./pages/Login";
 import { ContractItems } from "./pages/ContractItems";
-import { Construction } from "./pages/Construction";
+import { Obras } from "./pages/Obras";
 
 export function Router() {
   return (
@@ -11,7 +11,7 @@ export function Router() {
       <Route path="/" element={<Login />} />
       <Route path="/contratos" element={<Contratos />} />
       <Route path="/contratos/:id" element={<ContractItems />} />
-      <Route path="/obras/:id" element={<Construction />} />
+      <Route path="/obras/:id" element={<Obras />} />
     </Routes>
   );
 }
