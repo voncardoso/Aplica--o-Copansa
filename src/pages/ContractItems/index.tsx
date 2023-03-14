@@ -16,8 +16,19 @@ import {
 export function ContractItems() {
   const [contracItems, setContractsItems] = useState<any>([]);
   const params = useParams();
-  const navigate = useNavigate()
-  console.log(params.id);
+  const navigate = useNavigate();
+  const [contracts, setContracts] = useState<any>([]);
+
+  useEffect(() => {
+    async function getContracts() {
+      const collectionRef = collection(db, "contracts");
+      const querySnapshot = await getDocs(collectionRef);
+      setContracts(
+        querySnapshot.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }))
+      );
+    }
+    getContracts();
+  }, []);
 
   useEffect(() => {
     async function getContracts() {
@@ -34,6 +45,9 @@ export function ContractItems() {
     return contract.contract.id === params.id;
   });
 
+  const contrato = contracts.filter((contrato: any) => {
+    return contrato.contract.id === params.id;
+  });
 
   const soma = existeContract.reduce(
     (acc: any, value: any) => {
@@ -47,15 +61,29 @@ export function ContractItems() {
     }
   );
 
-
-  function handlecontructionItem(id: string){
-    navigate(`/obras/${id}`)
+  function handlecontructionItem(id: string) {
+    navigate(`/obras/${id}`);
   }
-  
+
+  console.log(contrato);
   return (
     <HomeContainer>
       <HomeHeader>
-        <h4></h4>
+        {contrato.map((item: any) => {
+          return (
+            <div>
+              <h5>Contrato</h5>
+              <strong>{item.contract?.id}</strong>
+              <p>{item.contract?.object}</p>
+              <p>
+                {item.contract?.value.toLocaleString("pt-br", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </p>
+            </div>
+          );
+        })}
       </HomeHeader>
 
       <HomeSection>
@@ -65,7 +93,7 @@ export function ContractItems() {
         <HomeTableSection>
           <HomeTableThead>
             <tr>
-              <th>CONTRATO / DESCRIÇÃO</th>
+              <th>DESCRIÇÃO</th>
               <th>VALOR</th>
               <th>FONTE</th>
               <th>FINACIAMENTO</th>
@@ -76,11 +104,13 @@ export function ContractItems() {
           <HomeTableTbody>
             {existeContract.map((item: any) => {
               return (
-                <tr className="dados" onClick={() =>{
-                  handlecontructionItem(item.id)
-                }}>
+                <tr
+                  className="dados"
+                  onClick={() => {
+                    handlecontructionItem(item.id);
+                  }}
+                >
                   <td>
-                    <p>{item.contract.id}</p>
                     <div>
                       <p>{`${item.financing.sigla} / ${item.contract.service}`}</p>
                     </div>

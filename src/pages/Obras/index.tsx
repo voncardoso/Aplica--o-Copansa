@@ -1,119 +1,171 @@
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../../config/firebase";
 import { ContarctContainer } from "../Contratos/style";
-import * as Dialog from '@radix-ui/react-dialog';
-import { ButtonModal, ConstructionContainer, ConstructionHeader, ContainerModal, Content, ContructionSection, FormModal, InputModal, Overlay, Title } from "./style";
+import * as Dialog from "@radix-ui/react-dialog";
+import {
+  ButtonModal,
+  ConstructionHeader,
+  ContainerModal,
+  Content,
+  ContructionSection,
+  FormModal,
+  InputModal,
+  Overlay,
+  Title,
+  SectionKML,
+} from "./style";
 
 export function Obras() {
-    const [contracConstruction, setContractsConstruction] = useState<any>({});
-    const params = useParams()
+  const [contracConstruction, setContractsConstruction] = useState<any>({});
+  const [contracts, setContracts] = useState<any>([]);
+  const [workData, setWorkData] = useState<any>([]);
+  const params = useParams();
 
-    useEffect(() => {
+  useEffect(() => {
     async function getContracts() {
       const collectionRef = doc(db, "budgets", `${params.id}`);
       const querySnapshot = await getDoc(collectionRef);
-      setContractsConstruction(querySnapshot.data())
+      setContractsConstruction(querySnapshot.data());
     }
     getContracts();
   }, [params.id]);
 
-  console.log(contracConstruction)
-  return(
+  useEffect(() => {
+    async function getContracts() {
+      const collectionRef = collection(db, "contracts");
+      const querySnapshot = await getDocs(collectionRef);
+      setContracts(
+        querySnapshot.docs.map((doc: any) => ({ ...doc.data(), id: doc.id }))
+      );
+    }
+    getContracts();
+  }, []);
+
+  const contrato = contracts.filter((contrato: any) => {
+    return contrato.contract.id === contracConstruction.contract?.id;
+  });
+
+  useEffect(() => {
+    if (contrato) {
+      contrato.map(async () => {
+        const workQ = query(
+          collection(db, `contracts/${contrato[0]?.id}/kmls`)
+        );
+        const workDetails = await getDocs(workQ);
+        setWorkData(
+          workDetails.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }))
+        );
+      });
+    }
+  }, [contracts]);
+
+  // console.log("teste", contracts[0]?.id);
+
+  // console.log(contracConstruction);
+  //console.log(contrato.id);
+  return (
     <ContarctContainer>
-        <ConstructionHeader>
-            <h3>{contracConstruction.contract?.service}</h3>
-        </ConstructionHeader>
-        <Title>Contrato</Title>
-        <ContructionSection>
-            <ul>
-                <li>
-                    <strong>Contrato</strong>
-                    <p>{contracConstruction.contract?.id}</p>
-                </li>
-                <li>
-                    <strong>Serviço</strong>
-                    <p>{contracConstruction.contract?.service}</p>    
-                </li>
-                <li>
-                    <strong>Valor</strong>
-                    <p>{contracConstruction.contract?.value.toLocaleString("pt-br", {
-                        style: "currency",
-                        currency: "BRL",
-                    })}</p>
-                </li>
-            </ul>
-        </ContructionSection>
-        <Title>Contratante</Title>
-        <ContructionSection>
-            <ul>
-                <li>
-                    <strong>Contratante</strong>
-                    <p>{contracConstruction.contractor?.fonte}</p>
-                </li>
-                <li>
-                    <strong>Valor</strong>
-                    <p>
-                        {contracConstruction.contractor?.value.toLocaleString("pt-br", {
-                            style: "currency",
-                            currency: "BRL",
-                            })
-                        }
-                    </p>    
-                </li>
-                <li>
-                </li>
-            </ul>
-        </ContructionSection>
-        <Title>Financiamento</Title>
-        <ContructionSection>
-            <ul className="GridFor">
-                <li>
-                    <strong>Financiamento</strong>
-                    <p>{contracConstruction.financing?.sigla}</p>
-                </li>
-                <li>
-                    <strong>Contrato</strong>
-                    <p>{contracConstruction.financing?.contract}</p>
-                </li>
-                <li>
-                    <strong>Fonte</strong>
-                    <p>{contracConstruction.financing?.fonte}</p>    
-                </li>
-                <li>
-                    <strong>Valor</strong>
-                    <p>
-                        {contracConstruction.financing?.value.toLocaleString("pt-br", {
-                            style: "currency",
-                            currency: "BRL",
-                        })
-                        }
-                    </p>    
-                </li>
-            </ul>
-        </ContructionSection>
-                        
-        <ContainerModal >
+      <ConstructionHeader>
+        {contrato.map((item: any) => {
+          return (
+            <div>
+              <h5>Contrato</h5>
+              <strong>{item.contract?.id}</strong>
+              <p>{item.contract?.object}</p>
+              <p>
+                {item.contract?.value.toLocaleString("pt-br", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </p>
+            </div>
+          );
+        })}
+      </ConstructionHeader>
+      <Title>Contratante</Title>
+      <ContructionSection>
+        <ul>
+          <li>
+            <strong>Contratante</strong>
+            <p>{contracConstruction.contractor?.fonte}</p>
+          </li>
+          <li>
+            <strong>Valor</strong>
+            <p>
+              {contracConstruction.contractor?.value.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </p>
+          </li>
+          <li></li>
+        </ul>
+      </ContructionSection>
+      <Title>Financiamento</Title>
+      <ContructionSection>
+        <ul className="GridFor">
+          <li>
+            <strong>Financiamento</strong>
+            <p>{contracConstruction.financing?.sigla}</p>
+          </li>
+          <li>
+            <strong>Contrato</strong>
+            <p>{contracConstruction.financing?.contract}</p>
+          </li>
+          <li>
+            <strong>Fonte</strong>
+            <p>{contracConstruction.financing?.fonte}</p>
+          </li>
+          <li>
+            <strong>Valor</strong>
+            <p>
+              {contracConstruction.financing?.value.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </p>
+          </li>
+        </ul>
+      </ContructionSection>
+      <Title>KML</Title>
+      <SectionKML>
+        {workData.map((item: any) => {
+          return (
+            <li>
+              <div>
+                <p>{item.name}</p>
+                <p>Data: {item.date}</p>
+              </div>
+              <button>Vizualizar</button>
+            </li>
+          );
+        })}
+      </SectionKML>
+      <ContainerModal>
         <Dialog.Root>
-            <Dialog.Trigger asChild>
-                <ButtonModal>Adicionar KML</ButtonModal>
-            </Dialog.Trigger>
+          <Dialog.Trigger asChild>
+            <ButtonModal>Adicionar KML</ButtonModal>
+          </Dialog.Trigger>
 
-            <Dialog.Portal>
-                <Overlay />
-                    <Content>
-                        <Dialog.Title>Adicinar KML</Dialog.Title>
-                        <FormModal action="">
-                            <InputModal type="file" />
+          <Dialog.Portal>
+            <Overlay />
+            <Content>
+              <Dialog.Title>Adicinar KML</Dialog.Title>
+              <FormModal action="">
+                <InputModal type="file" />
 
-                            <button>Adicionar</button>
-                        </FormModal>
-                        <Dialog.Close/>
-                    </Content>
-            </Dialog.Portal>
+                <button>Adicionar</button>
+              </FormModal>
+              <Dialog.Close />
+            </Content>
+          </Dialog.Portal>
         </Dialog.Root>
-        </ContainerModal >
+      </ContainerModal>
     </ContarctContainer>
-)
+  );
 }

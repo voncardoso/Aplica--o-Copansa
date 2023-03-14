@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as Dialog from '@radix-ui/react-dialog';
+import * as Dialog from "@radix-ui/react-dialog";
 
 export const ConstructionContainer = styled.main`
   width: 100%;
@@ -20,6 +20,44 @@ export const ConstructionHeader = styled.header`
   align-items: center;
   padding: 20px;
   background: ${(props) => props.theme["whithe"]};
+
+  div {
+    width: 550px;
+    text-align: center;
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+`;
+
+export const SectionKML = styled.ul`
+  width: 90vw;
+  margin: 0 auto;
+  margin-top: 10px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: ${(props) => props.theme["whithe"]};
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 6px;
+
+    button {
+      padding: 5px 10px;
+      background: ${(props) => props.theme["green-200"]};
+      border: none;
+      color: ${(props) => props.theme["whithe"]};
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
 `;
 
 export const ContructionSection = styled.section`
@@ -29,39 +67,38 @@ export const ContructionSection = styled.section`
   background: ${(props) => props.theme["whithe"]};
   border-radius: 10px;
 
-  h2{
-        text-align: justify;
+  h2 {
+    text-align: justify;
+  }
 
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 10px;
+    li {
+      text-decoration: none;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      strong {
+        text-align: center;
+      }
+      p {
+        text-align: center;
+        margin-top: 5px;
+      }
     }
+  }
 
-    ul{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 10px;
-        gap: 10px;
-        li{
-            text-decoration: none;
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            strong{
-                text-align: center;
-            }
-            p{
-                text-align: center;
-                margin-top: 5px;
-            }
-        }
-    }
-
-    .GridFor{
-            display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        align-items: center;
-        justify-content: space-between;  
-        }
+  .GridFor {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 // --- Estilo Modal
@@ -72,21 +109,21 @@ export const ContainerModal = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 40px;
-`
+`;
 
 export const ButtonModal = styled.button`
-  
   background: ${(props) => props.theme["green"]};
   padding: 5px 10px;
   border-radius: 5px;
   border: none;
   color: ${(props) => props.theme["whithe"]};
   cursor: pointer;
-  
-  &:focus{
-      outline: 0;
-      box-shadow: 0 0 0 2px ${(props) => props.theme["green"]};
-    }
+  margin-bottom: 20px;
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px ${(props) => props.theme["green"]};
+  }
 `;
 
 export const Overlay = styled(Dialog.Overlay)`
@@ -95,7 +132,7 @@ export const Overlay = styled(Dialog.Overlay)`
   height: 100vh;
   inset: 0;
   background: rgba(0, 0, 0, 0.75);
-`
+`;
 export const Content = styled(Dialog.Content)`
   min-width: 32rem;
   border-radius: 6px;
@@ -105,7 +142,7 @@ export const Content = styled(Dialog.Content)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`
+`;
 
 export const FormModal = styled.form`
   display: grid;
@@ -113,7 +150,7 @@ export const FormModal = styled.form`
   align-items: center;
   margin-top: 10px;
   gap: 5px;
-  button{
+  button {
     width: 100%;
     padding: 5px;
     cursor: pointer;
@@ -124,27 +161,21 @@ export const FormModal = styled.form`
     color: ${(props) => props.theme["whithe"]};
     border-radius: 5px;
 
-    &:focus{
+    &:focus {
       outline: 0;
       box-shadow: 0 0 0 2px ${(props) => props.theme["green"]};
     }
   }
-`
+`;
 
 export const InputModal = styled.input`
-  border: 2px solid ${(props) => props.theme["background"]} ;
+  border: 2px solid ${(props) => props.theme["background"]};
   padding: 10px;
   border-radius: 5px;
   width: 100%;
 
-  &:focus{
+  &:focus {
     outline: 0;
     box-shadow: 0 0 0 2px ${(props) => props.theme["green"]};
   }
 `;
-
-
-
-
-
-

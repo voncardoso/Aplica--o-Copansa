@@ -11,6 +11,15 @@ export const HomeHeader = styled.header`
   justify-content: center;
   padding: 20px;
   background: ${(props) => props.theme["whithe"]};
+
+  div {
+    width: 550px;
+    text-align: center;
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
 `;
 
 export const HomeSection = styled.section`
@@ -69,7 +78,7 @@ export const HomeTableTbody = styled.tbody`
     background: ${(props) => props.theme["background"]};
     border-bottom: 1px solid ${(props) => props.theme["background"]};
     cursor: pointer;
-    
+
     td {
       padding: 10px;
       font-size: 14px;
