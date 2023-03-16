@@ -68,11 +68,11 @@ export function Obras() {
 
   function handleClick(id: string) {
     navigate(
-      `https://6412da56804e46000822c4ed--fantastic-otter-f1d37a.netlify.app/mapa`
+      `https://www.encibra.app.br/mapa`
     );
   }
 
-  console.log(workData);
+  //console.log(workData);
   // console.log("teste", contracts[0]?.id);
 
   // console.log(contracConstruction);
@@ -96,25 +96,6 @@ export function Obras() {
           );
         })}
       </ConstructionHeader>
-      <Title>Contratante</Title>
-      <ContructionSection>
-        <ul>
-          <li>
-            <strong>Contratante</strong>
-            <p>{contracConstruction.contractor?.fonte}</p>
-          </li>
-          <li>
-            <strong>Valor</strong>
-            <p>
-              {contracConstruction.contractor?.value.toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              })}
-            </p>
-          </li>
-          <li></li>
-        </ul>
-      </ContructionSection>
       <Title>Financiamento</Title>
       <ContructionSection>
         <ul className="GridFor">
@@ -150,7 +131,7 @@ export function Obras() {
                 <p>{item.name}</p>
                 <p>Data: {item.date}</p>
               </div>
-              <a href="https://6412da56804e46000822c4ed--fantastic-otter-f1d37a.netlify.app/mapa">
+              <a href="https://www.encibra.app.br/mapa">
                 Vizualizar
               </a>
             </li>
