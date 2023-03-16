@@ -1,6 +1,6 @@
 import { collection, doc, getDoc, getDocs, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../../config/firebase";
 import { ContarctContainer } from "../Contratos/style";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -21,6 +21,7 @@ export function Obras() {
   const [contracConstruction, setContractsConstruction] = useState<any>({});
   const [contracts, setContracts] = useState<any>([]);
   const [workData, setWorkData] = useState<any>([]);
+  const navigate = useNavigate();
   const params = useParams();
 
   useEffect(() => {
@@ -50,6 +51,7 @@ export function Obras() {
   useEffect(() => {
     if (contrato) {
       contrato.map(async () => {
+        window.localStorage.setItem("contrato", contrato[0]?.id);
         const workQ = query(
           collection(db, `contracts/${contrato[0]?.id}/kmls`)
         );
@@ -64,6 +66,13 @@ export function Obras() {
     }
   }, [contracts]);
 
+  function handleClick(id: string) {
+    navigate(
+      `https://6412da56804e46000822c4ed--fantastic-otter-f1d37a.netlify.app/mapa`
+    );
+  }
+
+  console.log(workData);
   // console.log("teste", contracts[0]?.id);
 
   // console.log(contracConstruction);
@@ -141,7 +150,9 @@ export function Obras() {
                 <p>{item.name}</p>
                 <p>Data: {item.date}</p>
               </div>
-              <button>Vizualizar</button>
+              <a href="https://6412da56804e46000822c4ed--fantastic-otter-f1d37a.netlify.app/mapa">
+                Vizualizar
+              </a>
             </li>
           );
         })}

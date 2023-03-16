@@ -49,13 +49,14 @@ export const SectionKML = styled.ul`
     padding: 20px;
     border-radius: 6px;
 
-    button {
+    a {
       padding: 5px 10px;
       background: ${(props) => props.theme["green-200"]};
       border: none;
       color: ${(props) => props.theme["whithe"]};
       border-radius: 5px;
       cursor: pointer;
+      text-decoration: none;
     }
   }
 `;
