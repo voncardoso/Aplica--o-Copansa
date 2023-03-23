@@ -3,13 +3,19 @@ import { useEffect, useState } from "react";
 import ReactMapGL, { Layer, Source } from "react-map-gl";
 import { useParams } from "react-router-dom";
 import { db, storage } from "../../config/firebase";
+import { GeoJsonObject } from 'geojson';
+
+import rede from "../../geoJson/NR-10.geojson"
 
 
 export function MapKML() {
   const [contracts, setContracts] = useState<any>([]);
+  const [geojsonData, setGeojsonData] = useState<any>(null);
   const [viewport, setViewport] = useState({});
   const params = useParams();
   const [workData, setWorkData] = useState<any>([]);
+
+
 
   useEffect(() => {
     async function getContracts() {
@@ -47,51 +53,63 @@ export function MapKML() {
     kml();
   }, [contracts]);
 
-  const kml = workData.filter((item: any) => {
-    return item.id === params.id;
-  });
-  let urlTeste = "";
-  if (kml) {
-    const geoJsonRef = storage.ref(
-      "KML/PA/ALENQUER/16-2022/rede_antiga.geojson"
-    );
-
-    geoJsonRef
-      .getDownloadURL()
-      .then((url) => (urlTeste = url))
-      .catch((error) => console.error(error));
+  
+  useEffect(() =>{
+    async function getGeoJSON() {
+  
+      // Referência ao arquivo no armazenamento do Firebase
+      const geoJSONRef = storage.ref('GEOJSON/rede_antiga.geojson');
+      
+      geoJSONRef.getDownloadURL().then(url => {
+        fetch("https://firebasestorage.googleapis.com/v0/b/e-gs-encibra.appspot.com/o/GEOJSON%2Frede_antiga.geojson?alt=media&token=051cd0fd-4616-4d3b-936c-2b48d8b319f1")
+          .then(response => response.json())
+          .then(data => setGeojsonData(data))
+          .catch(error => console.log(error));
+      }).catch(error => {
+        console.log(error);
+      });
+    
   }
 
-  // useEffect(() => {
-  //   fetch(urlTeste)
-  //     .then((response) => response.json())
-  //     .then((data) => console.log("teste", data))
-  //     .catch((error) => console.error(error));
-  // }, [kml]);
+  getGeoJSON()
+  },[])
 
-  const layerStylePara = {
-    id: "maine0",
-    type: "fill",
-    source: "maine",
-    layout: {},
-    paint: {
-      "fill-opacity": 0.1,
+  const rede2 = {
+    id: "line-layer",
+    type: "line",
+    source: "line-source",
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round'
     },
-  };
+    paint: {
+      //  "fill-color": " #F4F3F1"
+      "line-color": "#11b4da",
+      'line-width': 3
+    },
+    
+  } as any;
+
 
   return (
     <>
       <ReactMapGL
-        mapboxAccessToken="pk.eyJ1Ijoidm9uMzQiLCJhIjoiY2w5NzRuOHpsMTRqNDNvb3pjMG52M2cxNyJ9.UGOW9fwC70K9dNuX23SBdQ"
         initialViewState={{
-          longitude: -122.4,
-          latitude: 37.8,
+          latitude: -1.9450735,
+          longitude: -54.7422771,
           zoom: 14,
         }}
         mapStyle="mapbox://styles/mapbox/streets-v11"
+        mapboxAccessToken="pk.eyJ1Ijoidm9uMzQiLCJhIjoiY2w5NzJkaTI0MnJ6eTNub2l1dXA4M3YxeCJ9.Z0GAMbATYKVCN_esIi7lFw"
         {...viewport}
+        
         cooperativeGestures={true}
-      ></ReactMapGL>
+      >
+
+        <Source id="line-layer" type="geojson" lineMetrics data={geojsonData}>
+          <Layer {...rede2} />
+        </Source>
+      </ReactMapGL>
     </>
   );
 }

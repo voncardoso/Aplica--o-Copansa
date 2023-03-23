@@ -17,6 +17,7 @@ import {
   SectionKML,
 } from "./style";
 
+
 export function Obras() {
   const [contracConstruction, setContractsConstruction] = useState<any>({});
   const [contracts, setContracts] = useState<any>([]);
@@ -68,7 +69,7 @@ export function Obras() {
 
   function handleClick(id: string) {
     navigate(
-      `https://www.encibra.app.br/mapa`
+      `/obras/${contrato[0]?.id}/map/${id}`
     );
   }
 
@@ -131,7 +132,9 @@ export function Obras() {
                 <p>{item.name}</p>
                 <p>Data: {item.date}</p>
               </div>
-              <a href="https://www.encibra.app.br/mapa">
+              <a onClick={() =>{
+                handleClick(item.id)
+              }}>
                 Vizualizar
               </a>
             </li>
