@@ -55,13 +55,15 @@ export function MapKML() {
 
   
   useEffect(() =>{
+    const geojson = workData.filter((item: any) => item.id === params.id)
+    console.log("geosjon",geojson)
     async function getGeoJSON() {
   
       // Referência ao arquivo no armazenamento do Firebase
       const geoJSONRef = storage.ref('GEOJSON/rede_antiga.geojson');
       
       geoJSONRef.getDownloadURL().then(url => {
-        fetch("https://firebasestorage.googleapis.com/v0/b/e-gs-encibra.appspot.com/o/GEOJSON%2Frede_antiga.geojson?alt=media&token=051cd0fd-4616-4d3b-936c-2b48d8b319f1")
+        fetch(geojson[0].geojson)
           .then(response => response.json())
           .then(data => setGeojsonData(data))
           .catch(error => console.log(error));
@@ -72,7 +74,7 @@ export function MapKML() {
   }
 
   getGeoJSON()
-  },[])
+  },[workData])
 
   const rede2 = {
     id: "line-layer",
@@ -90,9 +92,10 @@ export function MapKML() {
     
   } as any;
 
+  console.log("teste", workData)
 
   return (
-    <>
+    <section style={{width: "100vw", height: "100vh"}}>
       <ReactMapGL
         initialViewState={{
           latitude: -1.9450735,
@@ -105,11 +108,10 @@ export function MapKML() {
         
         cooperativeGestures={true}
       >
-
         <Source id="line-layer" type="geojson" lineMetrics data={geojsonData}>
           <Layer {...rede2} />
         </Source>
       </ReactMapGL>
-    </>
+    </section>
   );
 }
