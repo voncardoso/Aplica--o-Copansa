@@ -60,19 +60,15 @@ export function MapKML() {
     async function getGeoJSON() {
   
       // Referência ao arquivo no armazenamento do Firebase
-      const geoJSONRef = storage.ref('GEOJSON/rede_antiga.geojson');
-      
-      geoJSONRef.getDownloadURL().then(url => {
-        fetch(geojson[0].geojson)
+      const geoJSONRef = ""
+      fetch(geojson[0].geojson)
           .then(response => response.json())
           .then(data => setGeojsonData(data))
           .catch(error => console.log(error));
-      }).catch(error => {
-        console.log(error);
-      });
+      
+
     
   }
-
   getGeoJSON()
   },[workData])
 
@@ -92,7 +88,7 @@ export function MapKML() {
     
   } as any;
 
-  console.log("teste", workData)
+  console.log("teste", geojsonData)
 
   return (
     <section style={{width: "100vw", height: "100vh"}}>
