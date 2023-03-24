@@ -98,7 +98,7 @@ export function MapKML() {
           longitude: -54.7422771,
           zoom: 14,
         }}
-        mapStyle="mapbox://styles/mapbox/streets-v11"
+        mapStyle="mapbox://styles/mapbox/satellite-streets-v12"
         mapboxAccessToken="pk.eyJ1Ijoidm9uMzQiLCJhIjoiY2w5NzJkaTI0MnJ6eTNub2l1dXA4M3YxeCJ9.Z0GAMbATYKVCN_esIi7lFw"
         {...viewport}
         
